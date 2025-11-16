@@ -5,7 +5,7 @@ class DashboardPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.dashboard_header =(By.XPATH, "//h6[normalize-space()='Dashboard']")
+        self.dashboard_header =(By.XPATH, "//h6[normalize-space()='Dashboard111']")
         self.time_at_work_widget = (By.XPATH, "//p[normalize-space()='Time at Work']")
 
     def is_dashboard_displayed(self):
