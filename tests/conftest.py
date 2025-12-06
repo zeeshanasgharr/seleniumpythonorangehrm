@@ -3,6 +3,8 @@ from selenium import webdriver
 from dotenv import load_dotenv
 import os
 
+from pages.login_page import LoginPage
+from pages.logout_page import LogoutPage
 from utils.screenshot_utility import ScreenshotUtility
 
 load_dotenv()
@@ -69,3 +71,26 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
     setattr(item, f"rep_{rep.when}", rep)
+
+@pytest.fixture()
+def login_logout(driver, base_url, credentials):
+    """
+    Logs into the application before a test,
+    and logs out automatically after the test.
+    """
+    login_page = LoginPage(driver)
+    logout_page = LogoutPage(driver)
+
+    # --- Login ---
+    login_page.open(base_url)
+    login_page.login(credentials["username"], credentials["password"])
+
+    # Allow test to run while logged in
+    yield login_page
+
+    # --- Logout (runs after test completes) ---
+    try:
+        logout_page.logout()
+    except Exception:
+        # If logout fails (e.g., test ended on error), ignore so teardown doesn't break
+        pass
