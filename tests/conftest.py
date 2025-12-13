@@ -12,6 +12,9 @@ load_dotenv()
 @pytest.fixture()
 def driver():
     driver = webdriver.Chrome()
+
+    # Maximize the browser window
+    driver.maximize_window()
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
