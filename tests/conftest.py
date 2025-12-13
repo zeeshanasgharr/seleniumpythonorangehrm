@@ -11,13 +11,7 @@ load_dotenv()
 
 @pytest.fixture()
 def driver():
-    options = Options()
-
-    # Headless Chrome for Jenkins
-    options.add_argument("--headless=new")
-    options.add_argument("--window-size=1920,1080")
-    driver = webdriver.Chrome(options=options)
-
+    driver = webdriver.Chrome()
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
