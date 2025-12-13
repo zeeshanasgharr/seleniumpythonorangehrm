@@ -11,7 +11,7 @@ load_dotenv()
 
 @pytest.fixture()
 def driver():
-     options = Options()
+    options = Options()
 
     # Headless Chrome for Jenkins
     options.add_argument("--headless=new")
