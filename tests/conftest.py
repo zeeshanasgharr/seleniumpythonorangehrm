@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 from dotenv import load_dotenv
 import os
-
+from selenium.webdriver.chrome.options import Options
 from pages.login_page import LoginPage
 from pages.logout_page import LogoutPage
 from utils.screenshot_utility import ScreenshotUtility
