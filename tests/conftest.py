@@ -11,11 +11,13 @@ load_dotenv()
 
 @pytest.fixture()
 def driver():
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument("--headless=new")  # Recommended for newer Chrome
+    chrome_options.add_argument("--no-sandbox")     # Required in many CI environments
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevents memory issues
+    chrome_options.add_argument("--window-size=1920,1080")
 
-    # Maximize the browser window
-    driver.maximize_window()
-    driver.implicitly_wait(10)
+    driver = webdriver.Chrome(options=chrome_options)
     yield driver
     driver.quit()
 
